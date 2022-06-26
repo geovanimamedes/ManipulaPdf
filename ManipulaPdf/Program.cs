@@ -27,7 +27,9 @@ namespace ManipulaPdf
         {
             var pdfDocuments = new List<PdfDocument>();
             pdfs.ForEach(pdf => pdfDocuments.Add(PdfReader.Open(new MemoryStream(pdf), PdfDocumentOpenMode.Import)));
-            
+
+            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             using (var outPdf = new PdfDocument())
             {
                 for (int i = 1; i <= pdfDocuments.Count; i++)
@@ -40,7 +42,7 @@ namespace ManipulaPdf
                 
                 var stream = new MemoryStream();
                 outPdf.Save(stream, false);
-                outPdf.Save("file1and2.pdf");
+                //outPdf.Save("file1and2.pdf");
 
                 return stream.ToArray();
             }
